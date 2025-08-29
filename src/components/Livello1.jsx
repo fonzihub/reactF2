@@ -7,14 +7,21 @@ export default function Livello1() {
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts/1")
       .then((res) => {
+        console.log("risposta fetch ricevuta");
         if (res.ok) {
           return res.json();
         } else {
           throw new Error("errore nella chiamata");
         }
       })
-      .then((json) => setData(json))
-      .catch((err) => setError(err.message));
+      .then((json) => {
+        console.log("dati json ricevuti", json);
+        setData(json);
+      })
+      .catch((err) => {
+        console.log("errore nella fetch", err);
+        setError(err.message);
+      });
   }, []);
 
   if (error) return <div>Errore: {error}</div>;
